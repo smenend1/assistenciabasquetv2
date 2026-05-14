@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Assistència Bàsquet</title>
+
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="manifest" href="./manifest.json" />
+
+  <meta name="theme-color" content="#FF8800" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+</head>
+
+<body>
+  <main class="app">
+
+    <section id="screen-home" class="screen active">
+      <div class="hero">
+        <div class="logo-ball">🏀</div>
+        <h1>Assistència Bàsquet</h1>
+        <p>Control d’assistència sincronitzat en temps real per a diversos clubs.</p>
+      </div>
+
+      <section class="card selector-card">
+        <h2>1. Escull l’entitat</h2>
+
+        <label for="entity-select">Entitats guardades</label>
+        <select id="entity-select">
+          <option value="">Cap entitat guardada</option>
+        </select>
+
+        <div class="inline-form">
+          <input
+            id="new-entity-id"
+            type="text"
+            placeholder="Nou ID entitat. Exemple: club_salt"
+            autocomplete="off"
+          />
+          <button id="add-entity-btn" type="button" class="secondary-btn">
+            Afegir
+          </button>
+        </div>
+
+        <button id="delete-entity-btn" type="button" class="ghost-danger-btn">
+          Esborrar entitat seleccionada d’aquest dispositiu
+        </button>
+      </section>
+
+      <section class="card selector-card">
+        <h2>2. Escull l’equip</h2>
+
+        <label for="team-select">Equips de l’entitat</label>
+        <select id="team-select">
+          <option value="">Primer escull una entitat</option>
+        </select>
+
+        <div class="inline-form">
+          <input
+            id="new-team-name"
+            type="text"
+            placeholder="Nou equip. Exemple: Infantil Masculí A"
+            autocomplete="off"
+          />
+          <button id="add-team-btn" type="button" class="secondary-btn">
+            Afegir
+          </button>
+        </div>
+
+        <button id="delete-team-btn" type="button" class="ghost-danger-btn">
+          Esborrar equip seleccionat d’aquest dispositiu
+        </button>
+      </section>
+
+      <button id="open-attendance-btn" class="primary-btn">
+        Obrir assistència
+      </button>
+
+      <p class="info-text">
+        Les entitats i equips es guarden només en aquest dispositiu per facilitar l’accés. Les assistències es desen a Firebase.
+      </p>
+    </section>
+
+    <section id="screen-attendance" class="screen">
+
+      <header class="sticky-header">
+        <div class="header-main">
+          <button id="back-home-btn" class="ghost-btn">← Clubs i equips</button>
+
+          <div>
+            <h2 id="team-title">Equip</h2>
+            <p id="context-title">Entitat · Data</p>
+          </div>
+        </div>
+
+        <input id="attendance-date" type="date" />
+      </header>
+
+      <div id="locked-banner" class="locked-banner hidden">
+        DIA TANCAT · REGISTRE BLOQUEJAT
+      </div>
+
+      <section class="toolbar card">
+        <div class="import-box">
+          <label for="csv-input" class="file-btn">
+            Importar alumnes CSV
+          </label>
+
+          <input
+            id="csv-input"
+            type="file"
+            accept=".csv,text/csv"
+          />
+
+          <small>Format: Nom, Dorsal</small>
+        </div>
+
+        <button id="close-day-btn" class="danger-btn">
+          Tancar Dia
+        </button>
+      </section>
+
+      <section class="legend">
+        <span><b class="dot present"></b> Present</span>
+        <span><b class="dot absent"></b> Absent</span>
+        <span><b class="dot justified"></b> Justificat</span>
+      </section>
+
+      <section class="table-wrap">
+        <div class="attendance-table">
+          <div class="table-header">
+            <div class="sticky-col">Jugador</div>
+            <div>Dorsal</div>
+            <div>Present</div>
+            <div>Absent</div>
+            <div>Justificat</div>
+          </div>
+
+          <div id="players-list">
+            <div class="empty-state">
+              Encara no hi ha jugadors. Importa un CSV per començar.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div id="toast" class="toast hidden"></div>
+    </section>
+
+  </main>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
